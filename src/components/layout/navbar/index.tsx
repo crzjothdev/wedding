@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import LogoIcon from '@/components/icons/logo'
 import MobileMenu from './mobile-menu'
+import { Menu } from '@/lib/types'
 
 const menuItems = [
     { title: 'Home', path: '/home' },
@@ -10,11 +11,6 @@ const menuItems = [
     { title: 'Gallery', path: '/gallery' },
     { title: 'Contact Us', path: '/contact-use' }
 ]
-
-export type Menu = {
-    title: string,
-    path: string
-}
 
 export default function Navbar() {
     return (
@@ -40,7 +36,7 @@ export default function Navbar() {
                 ))}
             </ul>
             <div className="flex w-1/3 md:hidden justify-end">
-                <MobileMenu />
+                <MobileMenu menu={menuItems} />
             </div>
         </nav>
     )

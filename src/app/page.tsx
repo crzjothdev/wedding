@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import styles from './page.module.css'
+import AttendanceForm from '@/components/modules/attendance-frm'
 
 export default function Home() {
   return (
@@ -39,6 +39,11 @@ export default function Home() {
         <div className="flex flex-col md:flex-row justify-center h-[30rem] bg-center bg-cover bg-[url('https://websitedemos.net/wedding-planner-04/wp-content/uploads/sites/147/2019/11/hero.jpg')]">
           <div className="grow-1/2">
           </div>
+        </div>
+      </section>
+      <section className="px-4 md:px-0 mb-6 md:mb-10">
+        <div className="flex mx-auto max-w-lg justify-center">
+          <AttendanceForm />
         </div>
       </section>
     </main>

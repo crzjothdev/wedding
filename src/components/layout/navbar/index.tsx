@@ -18,8 +18,9 @@ export default function Navbar() {
             <div className="md:mr-4">
                 <Link href="/" aria-label="Go back home">
                     <img
-                        src="https://websitedemos.net/wedding-planner-04/wp-content/uploads/sites/147/2017/12/ringlogo-free-img.png"
+                        src="/wedding-logo.webp"
                         alt="Wedding Logo"
+                        className="h-[3.8rem]"
                     />
                 </Link>
             </div>

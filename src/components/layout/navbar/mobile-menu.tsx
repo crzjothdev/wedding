@@ -1,7 +1,7 @@
 'use client'
 
-import { useState, Fragment } from 'react'
 import Link from 'next/link'
+import { useState, Fragment } from 'react'
 import { Transition, Dialog } from '@headlessui/react'
 
 import { Menu } from '@/lib/types'

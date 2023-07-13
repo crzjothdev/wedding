@@ -1,18 +1,20 @@
+'use client'
+
 import Link from 'next/link'
 
-import LogoIcon from '@/components/icons/logo'
 import MobileMenu from './mobile-menu'
-import { Menu } from '@/lib/types'
+import useUser from '@/lib/useUser'
+import type { Menu } from '@/lib/types'
 
-const menuItems = [
-    { title: 'Home', path: '/home' },
-    { title: 'About Us', path: '/about-us' },
-    { title: 'Services', path: '/services' },
-    { title: 'Gallery', path: '/gallery' },
-    { title: 'Contact Us', path: '/contact-use' }
+const userOptions = [
+    { title: 'Obsequiar', path: '/gifts' },
+    { title: 'Galería', path: '/gallery' },
+    { title: 'Locación', path: '/location' }
 ]
 
 export default function Navbar() {
+    const { user } = useUser()
+
     return (
         <nav className="relative flex items-center justify-between bg-white p-4 dark:bg-black lg:px-6">
             <div className="md:mr-4">
@@ -25,19 +27,28 @@ export default function Navbar() {
                 </Link>
             </div>
             <ul className="hidden w-1/3 md:flex justify-end">
-                {menuItems.map((item: Menu) => (
-                    <li key={item.title}>
-                        <Link
-                            href={item.path}
-                            className="rounded-lg px-2 py-1 text-gray-800 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
-                        >
-                            {item.title}
-                        </Link>
-                    </li>
-                ))}
+                {user?.isLoggedIn ? (
+                    userOptions.map((item: Menu) => (
+                        <li key={item.title}>
+                            <Link
+                                href={item.path}
+                                className="rounded-lg px-2 py-1 text-gray-800 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
+                            >
+                                {item.title}
+                            </Link>
+                        </li>
+                    ))
+                ) : (
+                    <Link
+                        href="/login"
+                        className="rounded-lg px-2 py-1 text-gray-800 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
+                    >
+                        Iniciar Sessión
+                    </Link>
+                )}
             </ul>
             <div className="flex w-1/3 md:hidden justify-end">
-                <MobileMenu menu={menuItems} />
+                <MobileMenu menu={userOptions} />
             </div>
         </nav>
     )

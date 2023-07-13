@@ -7,9 +7,13 @@ import { Transition, Dialog } from '@headlessui/react'
 import { Menu } from '@/lib/types'
 import MenuIcon from '@/components/icons/menu'
 import CloseIcon from '@/components/icons/close'
+import useUser from '@/lib/useUser'
 
 export default function MobileMenu({ menu }: { menu: Menu[] }) {
+    const { user } = useUser()
+
     const [isOpen, setIsOpen] = useState(false)
+
     const openMobileMenu = () => setIsOpen(true)
     const closeMobileMenu = () => setIsOpen(false)
 
@@ -55,17 +59,27 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                                     <CloseIcon className="h-6 text-white" />
                                 </button>
                                 <ul className="flex flex-col">
-                                    {menu.map((item: Menu) => (
-                                        <li key={item.title}>
-                                            <Link
-                                                href={item.path}
-                                                className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
-                                                onClick={closeMobileMenu}
-                                            >
-                                                {item.title}
-                                            </Link>
-                                        </li>
-                                    ))}
+                                    {user?.isLoggedIn ? (
+                                        menu.map((item: Menu) => (
+                                            <li key={item.title}>
+                                                <Link
+                                                    href={item.path}
+                                                    className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
+                                                    onClick={closeMobileMenu}
+                                                >
+                                                    {item.title}
+                                                </Link>
+                                            </li>
+                                        ))
+                                    ) : (
+                                        <Link
+                                            href="/login"
+                                            className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
+                                            onClick={closeMobileMenu}
+                                        >
+                                            Iniciar Sesión
+                                        </Link>
+                                    )}
                                 </ul>
                             </div>
                         </Dialog.Panel>

@@ -1,5 +1,16 @@
-export default function Location() {
+import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
+import { getRequestCookie } from '@/lib/session'
+import type { User } from '@/lib/types'
+
+export default async function Location() {
+    const user = await getRequestCookie(cookies())
+
+    if (!user) {
+        redirect('/login')
+    }
+
     return (
-        <div>Página que renderizará la información de locación</div>
+        <div>Información del usuario {user.login}</div>
     )
 }

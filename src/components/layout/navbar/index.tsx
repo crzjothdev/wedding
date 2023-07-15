@@ -1,10 +1,7 @@
-'use client'
-
 import Link from 'next/link'
 
 import MobileMenu from './mobile-menu'
-import useUser from '@/lib/useUser'
-import type { Menu } from '@/lib/types'
+import type { Menu, User } from '@/lib/types'
 
 const userOptions = [
     { title: 'Obsequiar', path: '/gifts' },
@@ -12,9 +9,7 @@ const userOptions = [
     { title: 'Locación', path: '/location' }
 ]
 
-export default function Navbar() {
-    const { user } = useUser()
-
+export default function Navbar({ user }: { user: User | null }) {
     return (
         <nav className="relative flex items-center justify-between bg-white p-4 dark:bg-black lg:px-6">
             <div className="md:mr-4">

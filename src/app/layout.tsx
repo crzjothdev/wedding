@@ -1,7 +1,9 @@
 import { Inter } from 'next/font/google'
+import { cookies } from 'next/headers'
 
 import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
+import { getRequestCookie } from '@/lib/session'
 
 import './globals.css'
 
@@ -12,15 +14,17 @@ export const metadata = {
   description: 'Official wedding website',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const user = await getRequestCookie(cookies())
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
+        <Navbar user={user} />
         {children}
         <Footer />
       </body>

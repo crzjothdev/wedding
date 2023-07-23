@@ -3,10 +3,10 @@
 import React, { useState } from 'react'
 import useUser from '@/lib/useUser'
 import Form from '@/components/modules/login-frm'
-import fetchJson from '@/lib/fetchJson'
+import fetchJson, { FetchError } from '@/lib/fetchJson'
 
 export default function Login() {
-    const { mutateUser } = useUser({
+    const { mutateUser, isLoading } = useUser({
         redirectTo: '/',
         redirectIfFound: true
     })
@@ -18,6 +18,7 @@ export default function Login() {
             <div className="max-w-20 mx-auto">
                 <Form
                     errorMessage={errorMsg}
+                    isLoading={isLoading}
                     onSubmit={async function handleSubmit(event) {
                         event.preventDefault()
 
@@ -35,7 +36,11 @@ export default function Login() {
                                 })
                             )
                         } catch (error) {
-                            console.error('Un unexpected error happened:', error)
+                            if (error instanceof FetchError) {
+                                setErrorMsg(error.data.message)
+                            } else {
+                                console.error('An unexpected error happened:', error)
+                            }
                         }
                     }}
                 />

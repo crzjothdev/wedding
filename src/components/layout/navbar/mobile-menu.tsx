@@ -10,7 +10,7 @@ import CloseIcon from '@/components/icons/close'
 import useUser from '@/lib/useUser'
 
 export default function MobileMenu({ menu }: { menu: Menu[] }) {
-    const { user } = useUser()
+    const { user, isLoading } = useUser()
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -59,26 +59,28 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                                     <CloseIcon className="h-6 text-white" />
                                 </button>
                                 <ul className="flex flex-col">
-                                    {user?.isLoggedIn ? (
-                                        menu.map((item: Menu) => (
-                                            <li key={item.title}>
-                                                <Link
-                                                    href={item.path}
-                                                    className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
-                                                    onClick={closeMobileMenu}
-                                                >
-                                                    {item.title}
-                                                </Link>
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <Link
-                                            href="/login"
-                                            className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
-                                            onClick={closeMobileMenu}
-                                        >
-                                            Iniciar Sesión
-                                        </Link>
+                                    {!isLoading && (
+                                        user?.isLoggedIn ? (
+                                            menu.map((item: Menu) => (
+                                                <li key={item.title}>
+                                                    <Link
+                                                        href={item.path}
+                                                        className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
+                                                        onClick={closeMobileMenu}
+                                                    >
+                                                        {item.title}
+                                                    </Link>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <Link
+                                                href="/login"
+                                                className="rounded-lg py-1 text-xl text-black transition-colors hover:text-gray-500 dark:text-white"
+                                                onClick={closeMobileMenu}
+                                            >
+                                                Iniciar Sesión
+                                            </Link>
+                                        )
                                     )}
                                 </ul>
                             </div>

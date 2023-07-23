@@ -1,10 +1,13 @@
 import { FormEvent } from 'react'
+import SpinnerIcon from '@/components/icons/spinner'
 
 export default function Form({
     errorMessage,
+    isLoading,
     onSubmit,
 }: {
     errorMessage: string,
+    isLoading: boolean,
     onSubmit: (e: FormEvent<HTMLFormElement>) => void
 }) {
     return (
@@ -42,12 +45,20 @@ export default function Form({
                     id="password"
                 />
             </div>
-            {errorMessage && <p className="text-red">{errorMessage}</p>}
+            <p className="text-red-500 min-h-[10px] mb-4">{errorMessage}</p>
             <button 
-                className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+                className="w-full bg-blue-500 hover:bg-blue-700 text-white text-center font-bold py-2 px-4 rounded inline-flex justify-center items-center"
+                disabled={isLoading}
                 type="submit"
             >
-                Enviar
+                {isLoading ? (
+                    <>
+                        <SpinnerIcon className="h-5 w-5 mr-3" />
+                        Enviando...
+                    </>
+                ) : (
+                    'Enviar'
+                )}
             </button>
         </form>
     )

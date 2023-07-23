@@ -13,8 +13,8 @@ export async function POST(request: NextRequest) {
 
         if (secret !== password) {
             return NextResponse.json(
-                { message: 'Incorrect password' },
-                { status: 504 }
+                { message: 'Contraseña incorrecta' },
+                { status: 400 }
             )
         }
 
@@ -29,6 +29,6 @@ export async function POST(request: NextRequest) {
 
         return response
     } catch (error) {
-        return NextResponse.json({}, { status: 500 })
+        return NextResponse.json({ message: (error as Error).message }, { status: 500 })
     }
 }

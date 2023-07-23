@@ -9,7 +9,7 @@ export default function useUser({
 } = {}) {
     const fetcher = (...args: any) => fetch(...args).then(res => res.json())
 
-    const { data: user, mutate: mutateUser } = useSWR<User>('/api/user', fetcher)
+    const { data: user, isLoading, mutate: mutateUser } = useSWR<User>('/api/user', fetcher)
 
     useEffect(() => {
         if (!redirectTo || !user) return
@@ -21,5 +21,5 @@ export default function useUser({
         }
     }, [user, redirectIfFound, redirectTo])
 
-    return { user, mutateUser }
+    return { user, isLoading, mutateUser }
 }

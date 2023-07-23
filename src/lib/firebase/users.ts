@@ -8,6 +8,6 @@ export async function getUser(username: string) {
     if (docSnap.exists()) {
         return docSnap.data()
     } else {
-        console.error('Usuario no encontrado')
+        throw new Error('Usuario no encontrado')
     }
 }

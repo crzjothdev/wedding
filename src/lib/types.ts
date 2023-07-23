@@ -8,3 +8,8 @@ export type User = {
     login: string,
     avatarUrl: string,
 }
+
+export type Coordinate = {
+    lat: number,
+    lng: number
+}

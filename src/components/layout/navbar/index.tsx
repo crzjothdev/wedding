@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import MobileMenu from './mobile-menu'
-import type { Menu, User } from '@/lib/types'
+import type { Menu } from '@/lib/types'
 import useUser from '@/lib/useUser'
 import fetchJson from '@/lib/fetchJson'
 
@@ -18,7 +18,7 @@ export default function Navbar() {
     const router = useRouter()
 
     return (
-        <nav className="relative flex items-center justify-between bg-white p-4 dark:bg-black lg:px-6">
+        <nav className="relative z-[1] flex items-center justify-between bg-white p-4 dark:bg-black lg:px-6">
             <div className="md:mr-4">
                 <Link href="/" aria-label="Go back home">
                     <img
@@ -64,7 +64,7 @@ export default function Navbar() {
                             href="/login"
                             className="rounded-lg px-2 py-1 text-gray-800 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-400"
                         >
-                            Iniciar Sessión
+                            Iniciar Sesión
                         </Link>
                     )
                 )}

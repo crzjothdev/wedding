@@ -1,12 +1,9 @@
 import { cookies } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getRequestCookie } from '@/lib/session'
-import { User } from '@/lib/types'
 
-export async function GET(req: NextRequest) {
+export async function GET() {
     const user = await getRequestCookie(cookies())
-
-    console.log(user?.isLoggedIn)
 
     if (user) {
         return NextResponse.json({
@@ -17,7 +14,7 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({
             login: '',
             isLoggedIn: false,
-            avatarUrl: ''
+            hasConfirmed: false
         })
     }
 }

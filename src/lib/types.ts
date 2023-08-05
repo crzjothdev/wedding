@@ -6,7 +6,7 @@ export type Menu = {
 export type User = {
     isLoggedIn: boolean,
     login: string,
-    avatarUrl: string,
+    hasConfirmed: boolean,
 }
 
 export type Coordinate = {

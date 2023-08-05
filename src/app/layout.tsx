@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 
 import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
+import Message from '@/components/layout/message'
 
 import './globals.css'
 
@@ -21,6 +22,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
+        <Message />
         {children}
         <Footer />
       </body>

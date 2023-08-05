@@ -12,7 +12,7 @@ export default async function Gallery() {
     return (
         <main className="max-w-[1000px] container md:mx-auto">
             <div className="p-4 md:py-10 md:px-0">
-                <h1 className="text-[1.5rem] mb-3">Eventos a realizar y locación</h1>
+                <h1 className="text-[1.5rem] md:text-[2.5rem] mb-3">Eventos a realizar y locación</h1>
                 <h4 className="text-lg font-bold">Ceremonia Eclesiastica</h4>
                 <p className="text-md">
                     Nuestra ceremonia se realizará en la Capilla San Judas Tadeo, Suyapa 

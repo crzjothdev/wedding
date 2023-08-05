@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const { username, password } = await request.json()
 
     try {        
-        const { name, secret } = await getUser(username)
+        const { secret, hasConfirmed } = await getUser(username)
 
         if (secret !== password) {
             return NextResponse.json(
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        const user = { isLoggedIn: true, login: name, avatarUrl: '' } as User
+        const user = { isLoggedIn: true, login: username, hasConfirmed } as User
 
         const response = NextResponse.json(user)
         

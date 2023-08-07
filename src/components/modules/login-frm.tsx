@@ -1,5 +1,6 @@
-import { FormEvent } from 'react'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import SpinnerIcon from '@/components/icons/spinner'
+import type { AuthForm } from '@/lib/types'
 
 export default function Form({
     errorMessage,
@@ -8,14 +9,16 @@ export default function Form({
 }: {
     errorMessage: string,
     isLoading: boolean,
-    onSubmit: (e: FormEvent<HTMLFormElement>) => void
+    onSubmit: (e: SubmitHandler<AuthForm>) => void
 }) {
+    const { register, formState: { errors }, handleSubmit } = useForm()
+
     return (
         <form 
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             className="w-full md:w-[25rem] shadow-lg rounded px-8 pt-6 pb-8 mb-4"
         >
-            <h3 className="text-2xl text-center mb-4">Inicia Sesión</h3>
+            <h3 className="text-2xl text-center mb-4">Inicio de Sesión</h3>
             <div className="mb-4">
                 <label
                     htmlFor="email"
@@ -24,9 +27,8 @@ export default function Form({
                     Correo Electrónico
                 </label>
                 <input
+                    {...register('username', { required: true })}
                     className="shadow appearance-none w-full border focus:shadow-outline py-2 px-3"
-                    name="username"
-                    type="text"
                     placeholder="your@email.com"
                     id="email"
                 />
@@ -39,8 +41,8 @@ export default function Form({
                     Contraseña
                 </label>
                 <input
+                    {...register('password', { required: true })}
                     className="shadow appearance-none w-full border focus:shadow-outline py-2 px-3"
-                    name="password"
                     type="password"
                     id="password"
                 />
@@ -54,7 +56,7 @@ export default function Form({
                 {isLoading ? (
                     <>
                         <SpinnerIcon className="h-5 w-5 mr-3" />
-                        Enviando...
+                        Iniciando...
                     </>
                 ) : (
                     'Enviar'

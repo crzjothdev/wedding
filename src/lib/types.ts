@@ -13,3 +13,8 @@ export type Coordinate = {
     lat: number,
     lng: number
 }
+
+export type AuthForm = {
+    username: string,
+    password: string,
+}

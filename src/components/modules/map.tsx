@@ -20,7 +20,7 @@ export default function Map({
 
     if (!isLoaded) {
         return (
-            <div>Loading...</div>
+            <div className={`${className} animate-pulse bg-gray-500 opacity-75`}></div>
         )
     }
 

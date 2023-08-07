@@ -12,7 +12,7 @@ export default async function Gifts() {
 
     return (
         <main className="max-w-[1000px] container md:mx-auto">
-            <div className="p-4 min-h-screen md:py-10 md:px-0">
+            <div className="px-4 py-[3rem] md:px-0 md:py-10 min-h-screen">
                 <h1 className="text-[1.8rem] md:text-[2.5rem] mb-3">
                     Información de regalos y obsequios
                 </h1>

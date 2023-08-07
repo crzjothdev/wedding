@@ -6,12 +6,13 @@ import Form from '@/components/modules/login-frm'
 import fetchJson, { FetchError } from '@/lib/fetchJson'
 
 export default function Login() {
-    const { mutateUser, isLoading } = useUser({
+    const { mutateUser } = useUser({
         redirectTo: '/',
         redirectIfFound: true
     })
 
     const [errorMsg, setErrorMsg] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <div className="flex min-h-[100vh] items-center">
@@ -19,15 +20,11 @@ export default function Login() {
                 <Form
                     errorMessage={errorMsg}
                     isLoading={isLoading}
-                    onSubmit={async function handleSubmit(event) {
-                        event.preventDefault()
-
-                        const body = {
-                            username: event.currentTarget.username.value,
-                            password: event.currentTarget.password.value,
-                        }
+                    onSubmit={async function handleSubmit({ username, password }) {
+                        const body = { username, password }
 
                         try {
+                            setIsLoading(true)
                             mutateUser(
                                 await fetchJson('/api/login', {
                                     method: 'POST',
@@ -41,6 +38,8 @@ export default function Login() {
                             } else {
                                 console.error('An unexpected error happened:', error)
                             }
+                        } finally {
+                            setIsLoading(false)
                         }
                     }}
                 />
